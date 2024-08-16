@@ -13,7 +13,12 @@ Pod::Spec.new do |s|
   s.source         = { :git => package["repository"]["url"], :tag => "v#{s.version}" }
 
   s.source_files   = 'RNVectorIconsManager/**/*.{h,m,mm,swift}'
-  s.resources      = "Fonts/*.ttf"
+  
+  if defined?($RNVectorIconsIncludeFonts)
+    Pod::UI.puts "#{s.name}: Using RNVectorIconsIncludeFonts"
+    s.resources      = "Fonts/*.ttf"
+  end
+
   s.preserve_paths = "**/*.js"
   # React Native Core dependency
   if defined? install_modules_dependencies
